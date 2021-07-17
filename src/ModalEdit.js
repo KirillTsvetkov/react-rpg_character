@@ -6,24 +6,34 @@ export default function ModalEdit(props) {
   const [character, setCharacter] = React.useState(props.character);
   
   function handleChange(key, value, subStat=null) {
-    setCharacter({
-      ...character,
-      [key]: value
-    });
-  }
-
-  function handleSkillChange(key, value, stat=null) {
-    if(stat){
-      console.log(stat, value)
-      if(character[stat] >= value){
+    if(key === 'name'){
+      setCharacter({
+        ...character,
+        [key]: value
+      });
+    }else{
+      if(value>=0){
         setCharacter({
           ...character,
           [key]: value
         });
       }
     }
+  }
 
-    
+  function handleSkillChange(key, value, stat=null) {
+    if(stat){
+      if(value>=0){
+        if(character[stat] >= value){
+          setCharacter({
+            ...character,
+            [key]: value
+          });
+        }
+      }
+      
+    }
+
   }
 
   useEffect(() => {
